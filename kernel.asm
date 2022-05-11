@@ -167,29 +167,17 @@ SECTION code_2 align=16 vstart=0          ;定义代码段2（16字节对齐）
 ;===============================================================================
 SECTION data_1 align=16 vstart=0
 
-    msg0 db '  This is NASM - the famous Netwide Assembler. '
-         db 'Back at SourceForge and in intensive development! '
-         db 'Get the current versions from http://www.nasm.us/.'
+    msg0 db '  This is ToiletOS - an OS where all Apps shits. '
+         db ''
+         db ''
          db 0x0d,0x0a,0x0d,0x0a
-         db '  Example code for calculate 1+2+...+1000:',0x0d,0x0a,0x0d,0x0a
-         db '     xor dx,dx',0x0d,0x0a
-         db '     xor ax,ax',0x0d,0x0a
-         db '     xor cx,cx',0x0d,0x0a
-         db '  @@:',0x0d,0x0a
-         db '     inc cx',0x0d,0x0a
-         db '     add ax,cx',0x0d,0x0a
-         db '     adc dx,0',0x0d,0x0a
-         db '     inc cx',0x0d,0x0a
-         db '     cmp cx,1000',0x0d,0x0a
-         db '     jle @@',0x0d,0x0a
-         db '     ... ...(Some other codes)',0x0d,0x0a,0x0d,0x0a
          db 0
 
 ;===============================================================================
 SECTION data_2 align=16 vstart=0
 
-    msg1 db '  The above contents is written by LeeChung. '
-         db '2011-05-06'
+    msg1 db '  Written by Bill Haku in UESTC. '
+         db '2022-05-11'
          db 0
 
 ;===============================================================================
