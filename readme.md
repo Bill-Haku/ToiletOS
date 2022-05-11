@@ -12,3 +12,8 @@ Finish basic Kernel: show the information and author
 
 ![image-20220511200149799](/Users/hakubill/Library/Application Support/typora-user-images/image-20220511200149799.png)
 
+### 0.0.2
+
+Finish kernel loader:  boot a loader to boot kernel with MBR
+
+Add MakeFile for boot: easily compile source files and write into disk img
