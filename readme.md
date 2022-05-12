@@ -2,7 +2,7 @@
 
 **This is ToiletOS - an OS where all Apps shits.**
 
-## devlop log
+## Devlop log
 
 ### 0.0.1
 
@@ -17,3 +17,10 @@ Finish basic Kernel: show the information and author
 Finish kernel loader:  boot a loader to boot kernel with MBR
 
 Add MakeFile for boot: easily compile source files and write into disk img
+
+### 0.1.0
+
+Boot into system with Grub
+
+![image-20220512223913398](/Users/hakubill/Library/Application Support/typora-user-images/image-20220512223913398.png)
+
