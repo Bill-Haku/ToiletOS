@@ -8,7 +8,7 @@ S_OBJECTS = $(patsubst %.s, %.o, $(S_SOURCES)) #.s生成.o文件
 
 #编译器与链接器参数
 nasm_pars = -f elf -g -F stabs
-gcc_pars = -c -Wall -m32 -ggdb -gstabs+ -nostdinc -fno-builtin -fno-stack-protector -I include
+gcc_pars = -c -Wall -m32 -ggdb -gstabs+ -nostdinc -fno-builtin -fno-stack-protector -I include 
 ld_pars = -T kernel.ld -m elf_i386 -nostdlib
 
 #目标软盘
@@ -48,3 +48,9 @@ run:
 .PHONY:clean
 clean:
 	rm $(S_OBJECTS) $(C_OBJECTS) kernel.elf
+
+.PHONY:debug
+debug:
+	qemu -S -s -fda $(target_floppy) -boot a &
+	sleep 1
+	gdb -x gdb.script

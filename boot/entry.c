@@ -1,4 +1,5 @@
 #include "stdint.h"
+#include "printk.h"
 
 void kern_entry(){
     char *input = (uint8_t *)0xB8000;
@@ -13,6 +14,8 @@ void kern_entry(){
     *input++ = 'O'; *input++ = color;
     *input++ = 'S'; *input++ = color;
     *input++ = '!'; *input++ = color;
+
+    printkDebug();
     
     while(1)
     	asm volatile ("hlt");

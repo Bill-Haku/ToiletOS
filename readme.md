@@ -24,3 +24,9 @@ Boot into system with Grub
 
 ![image-20220512223913398](/Users/hakubill/Library/Application Support/typora-user-images/image-20220512223913398.png)
 
+### 0.2.0
+
+Implement kernel-level string output and color output
+
+![image-20220516124354887](/Users/hakubill/Library/Application Support/typora-user-images/image-20220516124354887.png)
+
