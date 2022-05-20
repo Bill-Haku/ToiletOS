@@ -2,6 +2,10 @@
 
 **This is ToiletOS - an OS where all Apps shits.**
 
+## New Brach
+
+- No GRUB Version
+
 ## Devlop log
 
 ### 0.0.1
