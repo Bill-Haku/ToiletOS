@@ -173,5 +173,5 @@ void printk_color(char *input_str,vga_color_t back,vga_color_t fore,...)
 void printkDebug(){
 	clear_screen();
 	printk("Toilet OS - %d.%d.%d\nby Bill Haku\n", main_version, patch_level, sub_level);
-	printk_color("Hello World",blue, red);
+	printk_color("Hello World\n",blue, red);
 }

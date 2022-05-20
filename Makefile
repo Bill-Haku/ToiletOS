@@ -43,7 +43,7 @@ umt:
 
 .PHONY:run
 run:
-	qemu -fda $(target_floppy) -boot a
+	qemu -fda $(target_floppy) -boot a -m 256
 
 .PHONY:clean
 clean:

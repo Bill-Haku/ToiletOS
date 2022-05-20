@@ -2,3 +2,8 @@ file kernel.elf
 target remote :1234
 break kern_entry
 c
+break boot/entry.c:20
+c
+break kernel/init/pmm.c:245
+
+break kernel/init/pmm.c:268

@@ -74,5 +74,5 @@ mutiboot_addr32:
 
 section .bss             ; 未初始化的数据段从这里开始
 stack:
-    resb 0x100000        ; 1M的内核栈 (应该够了吧,不够自己改)
+    resb 0x100000000000        ; 1M的内核栈 (应该够了吧,不够自己改) 64M
 STACK_TOP equ $-1 
