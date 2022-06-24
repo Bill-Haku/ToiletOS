@@ -59,3 +59,5 @@ Implement ASSERT.
 ### 0.3.5
 
 Support common string functions.
+
+Support common bitmap operations.
