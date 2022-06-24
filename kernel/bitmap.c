@@ -11,7 +11,7 @@ void bitmap_init(struct bitmap* btmp) {
 }
 
 // check if bit_idx == 1 return true
-bool bitmap_test(struct bitmap* btmp, uint32_t bit_idx) {
+bool bitmap_scan_test(struct bitmap* btmp, uint32_t bit_idx) {
     uint32_t byte_idx = bit_idx / 8;
     uint32_t bit_odd = bit_idx % 8;
     return (btmp->bits[byte_idx] & (BITMAP_MASK << bit_odd));

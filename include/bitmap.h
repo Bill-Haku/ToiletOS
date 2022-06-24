@@ -2,6 +2,7 @@
 #define BITMAP_H
 
 #include "global.h"
+#include "stdint.h"
 #define BITMAP_MASK 1
 
 struct bitmap {

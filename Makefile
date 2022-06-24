@@ -11,7 +11,8 @@ CFLAGS = -Wall -m32 -fno-stack-protector $(LIB) -c -fno-builtin -W -Wstrict-prot
 LDFLAGS = -m elf_i386 -Ttext $(ENTRY_POINT) -e main -Map $(BUILD_DIR)/kernel.map
 OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/entry.o $(BUILD_DIR)/printk.o $(BUILD_DIR)/string.o \
 	$(BUILD_DIR)/vga_basic.o $(BUILD_DIR)/port.o $(BUILD_DIR)/timer.o $(BUILD_DIR)/debug.o \
-	$(BUILD_DIR)/init.o $(BUILD_DIR)/interrupt.o $(BUILD_DIR)/kernel.o
+	$(BUILD_DIR)/init.o $(BUILD_DIR)/interrupt.o $(BUILD_DIR)/kernel.o $(BUILD_DIR)/bitmap.o \
+	$(BUILD_DIR)/memory.o
 
 # C代码编译
 $(BUILD_DIR)/entry.o: boot/entry.c
@@ -42,6 +43,12 @@ $(BUILD_DIR)/timer.o: device/timer.c
 	$(CC) $(CFLAGS) $< -o $@
 
 $(BUILD_DIR)/debug.o: kernel/debug.c 
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/bitmap.o: kernel/bitmap.c 
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/memory.o: kernel/memory.c 
 	$(CC) $(CFLAGS) $< -o $@
 
 # 编译loader和mbr

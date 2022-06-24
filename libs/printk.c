@@ -184,6 +184,6 @@ void put_int(uint32_t num) {
 
 void printkDebug(){
 	clear_screen();
-	printk("Toilet OS - %d.%d.%d\nby Bill Haku\n", main_version, patch_level, sub_level);
-	printk_color("Hello World\n",blue, red);
+	printk("Toilet OS - %d.%d.%d\nwritten by Bill Haku\n", main_version, patch_level, sub_level);
+	printk_color("OS is starting!\n",blue, red);
 }

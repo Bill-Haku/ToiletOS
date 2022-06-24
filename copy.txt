@@ -1,0 +1,25 @@
+Toilet OS - 0.4.0
+written by Bill Haku
+OS is starting!
+init_all.
+idt_init start.
+idt_desc_init done.
+pic_init done.
+idt_init done.
+timer_init start.
+timer_init done.
+Init memory start.
+Start init Memory pool...
+Kernel pool bitmap address: 3221856256
+Kernel pool physical address: 2097152
+User pool bitmap address: 3221860320
+User pool physical address: 135266304
+Init memory pool done.
+Init memory done.
+init_all done.
+Toilet OS Start Complete!
+Hello!
+Welcome to Toilet OS where every App can shits!
+ÿ
+
+
