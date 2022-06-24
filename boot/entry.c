@@ -1,6 +1,6 @@
 #include "stdint.h"
 #include "printk.h"
-#include "pmm.h"
+// #include "pmm.h"
 
 void kern_entry(){
     char *input = (uint8_t *)0xB8000;
@@ -17,7 +17,7 @@ void kern_entry(){
     *input++ = '!'; *input++ = color;
 
     printkDebug();
-    pmm_init();
+    // pmm_init();
     
     while(1)
     	asm volatile ("hlt");
