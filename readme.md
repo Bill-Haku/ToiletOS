@@ -47,3 +47,7 @@ When interrupt occurs, a string will be printed.
 ### 0.3.2
 
 Improve interrupt feature: print interrupt vector code.
+
+### 0.3.3
+
+Increase the frequency of PIT8253 to 100Hz

@@ -10,7 +10,7 @@ ASIB = -I include/
 CFLAGS = -Wall -m32 -fno-stack-protector $(LIB) -c -fno-builtin -W -Wstrict-prototypes -Wmissing-prototypes
 LDFLAGS = -m elf_i386 -Ttext $(ENTRY_POINT) -e main -Map $(BUILD_DIR)/kernel.map
 OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/entry.o $(BUILD_DIR)/printk.o $(BUILD_DIR)/string.o \
-	$(BUILD_DIR)/vga_basic.o $(BUILD_DIR)/port.o \
+	$(BUILD_DIR)/vga_basic.o $(BUILD_DIR)/port.o $(BUILD_DIR)/timer.o\
 	$(BUILD_DIR)/init.o $(BUILD_DIR)/interrupt.o $(BUILD_DIR)/kernel.o
 
 # C代码编译
@@ -36,6 +36,9 @@ $(BUILD_DIR)/init.o: kernel/init.c
 	$(CC) $(CFLAGS) $< -o $@
 
 $(BUILD_DIR)/interrupt.o: kernel/interrupt.c 
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/timer.o: device/timer.c 
 	$(CC) $(CFLAGS) $< -o $@
 
 # 编译loader和mbr
