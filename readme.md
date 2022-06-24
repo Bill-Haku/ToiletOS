@@ -34,3 +34,6 @@ Implement kernel-level string output and color output
 
 ![image-20220516124354887](/Users/hakubill/Library/Application Support/typora-user-images/image-20220516124354887.png)
 
+### 0.3.0
+
+Move the emulator to Bochs as Qemu seems to be some problem when running Assembly codes, and each run gets a different result in Qemu.
