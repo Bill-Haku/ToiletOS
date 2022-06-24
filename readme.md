@@ -37,3 +37,9 @@ Implement kernel-level string output and color output
 ### 0.3.0
 
 Move the emulator to Bochs as Qemu seems to be some problem when running Assembly codes, and each run gets a different result in Qemu.
+
+### 0.3.1
+
+Add support for Interrupt.
+
+When interrupt occurs, a string will be printed.

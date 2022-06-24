@@ -9,7 +9,9 @@ ASFLAGS = -f elf
 ASIB = -I include/
 CFLAGS = -Wall -m32 -fno-stack-protector $(LIB) -c -fno-builtin -W -Wstrict-prototypes -Wmissing-prototypes
 LDFLAGS = -m elf_i386 -Ttext $(ENTRY_POINT) -e main -Map $(BUILD_DIR)/kernel.map
-OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/entry.o $(BUILD_DIR)/printk.o $(BUILD_DIR)/string.o $(BUILD_DIR)/vga_basic.o $(BUILD_DIR)/port.o ${BUILD_DIR}/print.o
+OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/entry.o $(BUILD_DIR)/printk.o $(BUILD_DIR)/string.o \
+	$(BUILD_DIR)/vga_basic.o $(BUILD_DIR)/port.o \
+	$(BUILD_DIR)/init.o $(BUILD_DIR)/interrupt.o $(BUILD_DIR)/kernel.o
 
 # C代码编译
 $(BUILD_DIR)/entry.o: boot/entry.c
@@ -30,6 +32,12 @@ $(BUILD_DIR)/vga_basic.o: libs/vga_basic.c
 $(BUILD_DIR)/main.o: kernel/main.c 
 	$(CC) $(CFLAGS) $< -o $@
 
+$(BUILD_DIR)/init.o: kernel/init.c 
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/interrupt.o: kernel/interrupt.c 
+	$(CC) $(CFLAGS) $< -o $@
+
 # 编译loader和mbr
 $(BUILD_DIR)/mbr.bin: mbr/mbr.S
 	$(AS) $(ASIB) $< -o $@
@@ -38,8 +46,9 @@ $(BUILD_DIR)/loader.bin: mbr/loader.S
 	$(AS) $(ASIB) $< -o $@
 
 # 编译汇编
-# $(BUILD_DIR)/kernel.o: kernel/kernel.asm
-# 	$(AS) $(ASFLAGS) $< -o $@
+
+$(BUILD_DIR)/kernel.o: kernel/kernel.S 
+	$(AS) $(ASFLAGS) $< -o $@
 
 # $(BUILD_DIR)/print.o: lib/kernel/print.asm
 # 	$(AS) $(ASFLAGS) $< -o $@
@@ -57,6 +66,7 @@ mk_dir:
 
 mkbochs:
 	if [ ! -d $(BUILD_DIR) ]; then mkdir $(BUILD_DIR); fi
+	rm disk.img
 	bximage -hd=10M -mode="create" -q disk.img
 
 hd:

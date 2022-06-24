@@ -170,6 +170,10 @@ void printk_color(char *input_str,vga_color_t back,vga_color_t fore,...)
 	kputs_color(output_str,back,fore);
 }
 
+void put_str(char* message) {
+	printk("%s", message);
+}
+
 void printkDebug(){
 	clear_screen();
 	printk("Toilet OS - %d.%d.%d\nby Bill Haku\n", main_version, patch_level, sub_level);
