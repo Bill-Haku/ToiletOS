@@ -51,3 +51,7 @@ Improve interrupt feature: print interrupt vector code.
 ### 0.3.3
 
 Increase the frequency of PIT8253 to 100Hz
+
+### 0.3.4
+
+Implement ASSERT.
