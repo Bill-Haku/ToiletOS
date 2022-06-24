@@ -43,3 +43,7 @@ Move the emulator to Bochs as Qemu seems to be some problem when running Assembl
 Add support for Interrupt.
 
 When interrupt occurs, a string will be printed.
+
+### 0.3.2
+
+Improve interrupt feature: print interrupt vector code.

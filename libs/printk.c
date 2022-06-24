@@ -174,6 +174,14 @@ void put_str(char* message) {
 	printk("%s", message);
 }
 
+void put_char(uint8_t char_ascii) {
+	printk("%c", char_ascii);
+}
+
+void put_int(uint32_t num) {
+	printk("%d", num);
+}
+
 void printkDebug(){
 	clear_screen();
 	printk("Toilet OS - %d.%d.%d\nby Bill Haku\n", main_version, patch_level, sub_level);
