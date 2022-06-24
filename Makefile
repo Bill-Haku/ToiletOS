@@ -10,7 +10,6 @@ ASIB = -I include/
 CFLAGS = -Wall -m32 -fno-stack-protector $(LIB) -c -fno-builtin -W -Wstrict-prototypes -Wmissing-prototypes
 LDFLAGS = -m elf_i386 -Ttext $(ENTRY_POINT) -e main -Map $(BUILD_DIR)/kernel.map
 OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/entry.o $(BUILD_DIR)/printk.o $(BUILD_DIR)/string.o $(BUILD_DIR)/vga_basic.o $(BUILD_DIR)/port.o ${BUILD_DIR}/print.o
-# OBJS = $(BUILD_DIR)/main.o ${BUILD_DIR}/print.o
 
 # C代码编译
 $(BUILD_DIR)/entry.o: boot/entry.c
@@ -56,28 +55,28 @@ mk_dir:
 	qemu-img create -f qcow2 -o preallocation=metadata disk.img 4M
 	echo "Create image done."
 
+mkbochs:
+	if [ ! -d $(BUILD_DIR) ]; then mkdir $(BUILD_DIR); fi
+	bximage -hd=10M -mode="create" -q disk.img
+
 hd:
 	dd if=$(BUILD_DIR)/mbr.bin of=disk.img bs=512 count=1 conv=notrunc
 	dd if=$(BUILD_DIR)/loader.bin of=disk.img bs=512 count=4 seek=2 conv=notrunc
 	dd if=$(BUILD_DIR)/kernel.bin of=disk.img bs=512 count=200 seek=9 conv=notrunc
 
-mkbochs:
-	if [ ! -d $(BUILD_DIR) ]; then mkdir $(BUILD_DIR); fi
-	bximage -hd=10M -mode="create" -q disk.img
-
 clean:
 	rm -rf disk.img $(BUILD_DIR)
 
-.PHONY:run
-run:
+.PHONY:runqemu
+runqemu:
 	qemu -drive file=$(target_floppy),format=raw,media=disk -boot c -m 256 --no-reboot
 
-.PHONY:rb
-rb:
+.PHONY:run
+run:
 	bochs -f bochsrc
 
 build: $(BUILD_DIR)/mbr.bin $(BUILD_DIR)/loader.bin $(BUILD_DIR)/kernel.bin
 
-all: mk_dir build hd
+allqemu: mk_dir build hd
 
-ab: mkbochs build hd
+all: mkbochs build hd
