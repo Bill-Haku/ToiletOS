@@ -52,6 +52,7 @@ inline char *num2hexstr(int number,int need0x)
 
 inline void memcpy(uint8_t *dest ,const uint8_t *src,uint32_t len)
 {
+	ASSERT(dest != NULL && src != NULL);
 	for(;len!=0;len--)
 	{
 		*dest=*src;
@@ -62,11 +63,28 @@ inline void memcpy(uint8_t *dest ,const uint8_t *src,uint32_t len)
 
 inline void memset(void *dest,uint8_t val ,uint32_t len)
 {
+	ASSERT(dest != NULL);
 	uint8_t *dst = (uint8_t *)dest;
 
     for ( ; len != 0; len--) {
         *dst++ = val;
     }
+}
+
+int memcmp(const void* a_, const void* b_, uint32_t size)
+{
+	ASSERT(a_ != NULL && b_ != NULL);
+	const uint8_t *a = (const uint8_t *)a_;
+	const uint8_t *b = (const uint8_t *)b_;
+
+	for ( ; size != 0; size--) {
+		if (*a != *b) {
+			return *a - *b;
+		}
+		a++;
+		b++;
+	}
+	return 0;
 }
 
 inline void bzero(void *dest, uint32_t len)
@@ -76,13 +94,14 @@ inline void bzero(void *dest, uint32_t len)
 
 inline int strcmp(const char *str1,const char *str2)
 {
+	ASSERT(str1 != NULL && str2 != NULL);
 	while(1){
 		if (*str1=='\0'&&*str2=='\0')
 			return 0;
 		else if ((int)*str1>(int)*str2){
 			return 1;
 		}
-		else if((int)*str1>(int)*str2){
+		else if((int)*str1<(int)*str2){
 			return -1;
 		}
 		else{
@@ -94,6 +113,7 @@ inline int strcmp(const char *str1,const char *str2)
 
 inline int strlen(const char *src)
 {
+	ASSERT(src != NULL);
 	int i=0;
 	while(*(src+i)!='\0')
 		i++;
@@ -102,6 +122,7 @@ inline int strlen(const char *src)
 
 inline char *strcpy(char *dest, const char *src)
 {
+	ASSERT(dest != NULL && src != NULL);
 	char *dest_head=dest;
 	while(*(src)!='\0')
 	{
@@ -116,10 +137,49 @@ inline char *strcpy(char *dest, const char *src)
 
 inline char *strcat(char *dest, const char *src)
 {
+	ASSERT(dest != NULL && src != NULL);
 	char *pointer=dest;
 	for(;*pointer!='\0';pointer++);
 	strcpy(pointer,src);
 	return dest;		
+}
+
+char *strchr(const char *str, const uint8_t ch)
+{
+	ASSERT(str != NULL);
+	while(*str!='\0')
+	{
+		if(*str==ch)
+			return (char *)str;
+		str++;
+	}
+	return NULL;
+}
+
+char *strrchr(const char *str, const uint8_t ch)
+{
+	ASSERT(str != NULL);
+	const char* last_char = NULL;
+	while(*str!='\0')
+	{
+		if(*str==ch)
+			last_char=str;
+		str++;
+	}
+	return (char*)last_char;
+}
+
+uint32_t strchrs(const char* str, uint8_t ch) {
+	ASSERT(str != NULL);
+	uint32_t count = 0;
+	const char* p = str;
+	while (*p != '\0') {
+		if (*p == ch) {
+			count++;
+		}
+		p++;
+	}
+	return count;
 }
 
 inline char *uintTostring(uint32_t num)
