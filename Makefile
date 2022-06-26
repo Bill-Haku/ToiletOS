@@ -12,7 +12,8 @@ LDFLAGS = -m elf_i386 -Ttext $(ENTRY_POINT) -e main -Map $(BUILD_DIR)/kernel.map
 OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/entry.o $(BUILD_DIR)/printk.o $(BUILD_DIR)/string.o \
 	$(BUILD_DIR)/vga_basic.o $(BUILD_DIR)/port.o $(BUILD_DIR)/timer.o $(BUILD_DIR)/debug.o \
 	$(BUILD_DIR)/init.o $(BUILD_DIR)/interrupt.o $(BUILD_DIR)/kernel.o $(BUILD_DIR)/bitmap.o \
-	$(BUILD_DIR)/memory.o $(BUILD_DIR)/thread.o
+	$(BUILD_DIR)/memory.o $(BUILD_DIR)/thread.o $(BUILD_DIR)/list.o $(BUILD_DIR)/switch.o \
+	$(BUILD_DIR)/print.o
 
 # C代码编译
 $(BUILD_DIR)/entry.o: boot/entry.c
@@ -54,6 +55,9 @@ $(BUILD_DIR)/memory.o: kernel/memory.c
 $(BUILD_DIR)/thread.o: kernel/thread.c
 	$(CC) $(CFLAGS) $< -o $@
 
+$(BUILD_DIR)/list.o: include/kernel/list.c
+	$(CC) $(CFLAGS) $< -o $@
+
 # 编译loader和mbr
 $(BUILD_DIR)/mbr.bin: mbr/mbr.S
 	$(AS) $(ASIB) $< -o $@
@@ -64,6 +68,12 @@ $(BUILD_DIR)/loader.bin: mbr/loader.S
 # 编译汇编
 
 $(BUILD_DIR)/kernel.o: kernel/kernel.S 
+	$(AS) $(ASFLAGS) $< -o $@
+
+$(BUILD_DIR)/switch.o: kernel/switch.S
+	$(AS) $(ASFLAGS) $< -o $@
+
+$(BUILD_DIR)/print.o: kernel/print.S
 	$(AS) $(ASFLAGS) $< -o $@
 
 # $(BUILD_DIR)/print.o: lib/kernel/print.asm

@@ -73,3 +73,9 @@ Adjust start infos.
 ### 0.4.1 
 
 Implement basic thread management.
+
+### 0.4.2
+
+Improve thread management and error handler.
+
+Test 2 thread exchange
