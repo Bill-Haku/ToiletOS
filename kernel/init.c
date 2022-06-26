@@ -3,9 +3,10 @@
 #include "timer.h"
 #include "memory.h"
 #include "thread.h"
+#include "../device/console.h"
 
 void init_all() {
-    put_str("initing_all start...\n");
+    printk("initing_all start...\n");
     // init interrupt
     idt_init();
     // init timer PIT8253
@@ -14,6 +15,8 @@ void init_all() {
     mem_init();
     // init thread
     thread_init();
+    // init console
+    console_init();
 
-    put_str("init_all done.\n");
+    printk("init_all done.\n");
 }

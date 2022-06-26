@@ -5,4 +5,5 @@
 *.elf
 /.vscode
 *.lock
+copy.txt
 

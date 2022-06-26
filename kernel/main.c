@@ -2,6 +2,7 @@
 #include "init.h"
 #include "debug.h"
 #include "thread.h"
+#include "../device/console.h"
 
 void k_thread_function_a(void*);
 void k_thread_function_b(void*);
@@ -20,20 +21,22 @@ void main(void) {
     intr_enable();
 
 	while(1) {
-		printk("main ");
+		console_put_str("main ");
 	}
 	return 0;
 }
 
 void k_thread_function_a(void* args) {
+	char* para = args;
     // 这里必须是死循环，否则执行流并不会返回到main函数，所以CPU将会放飞自我，出发6号未知操作码异常
     while (1) {
-        put_str((char*) args);
+        console_put_str(para);
     }
 }
 
 void k_thread_function_b(void* args) {
+	char* para = args;
     while (1) {
-        put_str((char*) args);
+        console_put_str(para);
     }
 }
