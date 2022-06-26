@@ -69,3 +69,7 @@ Implement memory management.
 Adjust start infos.
 
 ![image-20220624210336363](/Users/hakubill/Library/Application Support/typora-user-images/image-20220624210336363.png)
+
+### 0.4.1 
+
+Implement basic thread management.
