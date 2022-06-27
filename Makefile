@@ -14,7 +14,8 @@ OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/entry.o $(BUILD_DIR)/printk.o $(BUILD_DI
 	$(BUILD_DIR)/init.o $(BUILD_DIR)/interrupt.o $(BUILD_DIR)/kernel.o $(BUILD_DIR)/bitmap.o \
 	$(BUILD_DIR)/memory.o $(BUILD_DIR)/thread.o $(BUILD_DIR)/list.o $(BUILD_DIR)/switch.o \
 	$(BUILD_DIR)/print.o $(BUILD_DIR)/sync.o $(BUILD_DIR)/console.o $(BUILD_DIR)/keyboard.o \
-	$(BUILD_DIR)/ioqueue.o $(BUILD_DIR)/tss.o $(BUILD_DIR)/process.o
+	$(BUILD_DIR)/ioqueue.o $(BUILD_DIR)/tss.o $(BUILD_DIR)/process.o $(BUILD_DIR)/syscall.o 
+
 
 # C代码编译
 $(BUILD_DIR)/entry.o: boot/entry.c
@@ -47,7 +48,7 @@ $(BUILD_DIR)/timer.o: device/timer.c
 $(BUILD_DIR)/debug.o: kernel/debug.c 
 	$(CC) $(CFLAGS) $< -o $@
 
-$(BUILD_DIR)/bitmap.o: kernel/bitmap.c 
+$(BUILD_DIR)/bitmap.o: libs/kernel/bitmap.c 
 	$(CC) $(CFLAGS) $< -o $@
 
 $(BUILD_DIR)/memory.o: kernel/memory.c 
@@ -56,7 +57,7 @@ $(BUILD_DIR)/memory.o: kernel/memory.c
 $(BUILD_DIR)/thread.o: kernel/thread/thread.c
 	$(CC) $(CFLAGS) $< -o $@
 
-$(BUILD_DIR)/list.o: include/kernel/list.c
+$(BUILD_DIR)/list.o: libs/kernel/list.c
 	$(CC) $(CFLAGS) $< -o $@
 
 $(BUILD_DIR)/sync.o: kernel/thread/sync.c
@@ -75,6 +76,9 @@ $(BUILD_DIR)/tss.o: user/tss.c
 	$(CC) $(CFLAGS) $< -o $@
 
 $(BUILD_DIR)/process.o: user/process.c
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/syscall.o: libs/user/syscall.c
 	$(CC) $(CFLAGS) $< -o $@
 
 # 编译loader和mbr

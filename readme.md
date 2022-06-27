@@ -6,7 +6,7 @@
 
 - No GRUB Version
 
-## Devlop log
+## Develop log
 
 ### 0.0.1
 
@@ -93,3 +93,7 @@ Implement keyboard input and output based on ioqueue.
 ### 0.4.5
 
 Implement TSS and a basic user process management.
+
+### 0.4.6
+
+Implement syscall supports.

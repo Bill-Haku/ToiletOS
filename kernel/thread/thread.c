@@ -7,6 +7,7 @@
 # include "debug.h"
 # include "printk.h"
 # include "../user/process.h"
+# include "thread/sync.h"
 
 static struct list_elem* thread_tag;
 
@@ -42,6 +43,17 @@ struct task_struct* running_thread() {
 }
 
 /**
+ * 分配pid.
+ */
+static pid_t allocate_pid(void) {
+   static pid_t next_pid = 0;
+   lock_acquire(&pid_lock);
+   next_pid++;
+   lock_release(&pid_lock);
+   return next_pid;
+}
+
+/**
  * 初始化线程栈.
  */ 
 void thread_create(struct task_struct* pthread, thread_func function, void* func_args) {
@@ -60,6 +72,7 @@ void thread_create(struct task_struct* pthread, thread_func function, void* func
  */ 
 void init_thread(struct task_struct* pthread, char* name, int prio) {
     memset(pthread, 0, sizeof(*pthread));
+    pthread->pid = allocate_pid();
     strcpy(pthread->name, name);
 
     if (pthread == main_thread) {
@@ -162,6 +175,7 @@ void thread_init() {
     put_str("Start to init thread...\n");
     list_init(&thread_all_list);
     list_init(&thread_ready_list);
+    lock_init(&pid_lock);
     make_main_thread();
     put_str("Thread init done.\n");
 }

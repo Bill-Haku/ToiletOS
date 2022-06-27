@@ -4,11 +4,13 @@
 # include "stdint.h"
 # include "kernel/list.h"
 # include "memory.h"
+# include "bitmap.h"
 
 /**
  * 自定义通用函数类型.
  */ 
 typedef void thread_func(void*);
+typedef int16_t pid_t;
 
 # define PAGE_SIZE 4096
 
@@ -71,6 +73,7 @@ struct thread_stack {
 struct task_struct {
     // 内核栈
     uint32_t* self_kstack;
+    pid_t pid;
     enum task_status status;
     char name[16];
     uint8_t priority;
@@ -90,6 +93,7 @@ struct task_struct {
 struct task_struct* main_thread;
 struct list thread_ready_list;
 struct list thread_all_list;
+struct lock pid_lock;
 
 struct task_struct* running_thread();
 void thread_create(struct task_struct* pthread, thread_func function, void* func_args);
