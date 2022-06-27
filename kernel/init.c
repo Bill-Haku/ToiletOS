@@ -5,6 +5,7 @@
 #include "thread.h"
 #include "../device/console.h"
 #include "../device/keyboard.h"
+#include "../user/tss.h"
 
 void init_all() {
     printk("initing_all start...\n");
@@ -20,6 +21,8 @@ void init_all() {
     console_init();
     // init keyboard
     keyboard_init();
+    // init tss
+    tss_init();
 
     printk("init_all done.\n");
 }

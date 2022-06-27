@@ -3,11 +3,14 @@
 
 # include "stdint.h"
 # include "kernel/list.h"
+# include "memory.h"
 
 /**
  * 自定义通用函数类型.
  */ 
 typedef void thread_func(void*);
+
+# define PAGE_SIZE 4096
 
 /**
  * 线程状态.
@@ -80,8 +83,13 @@ struct task_struct {
     // 所有不可运行线程队列节点
     struct list_elem all_list_tag;
     uint32_t* pgdir;
+    struct virtual_addr userprog_addr;
     uint32_t stack_magic;
 };
+
+struct task_struct* main_thread;
+struct list thread_ready_list;
+struct list thread_all_list;
 
 struct task_struct* running_thread();
 void thread_create(struct task_struct* pthread, thread_func function, void* func_args);
@@ -89,5 +97,7 @@ void init_thread(struct task_struct* pthread, char* name, int prio);
 struct task_struct* thread_start(char* name, int prio, thread_func function, void* func_args);
 void schedule();
 void thread_init();
+void thread_block(enum task_status status);
+void thread_unblock(struct task_struct* pthread);
 
 # endif

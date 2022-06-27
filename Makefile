@@ -14,7 +14,7 @@ OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/entry.o $(BUILD_DIR)/printk.o $(BUILD_DI
 	$(BUILD_DIR)/init.o $(BUILD_DIR)/interrupt.o $(BUILD_DIR)/kernel.o $(BUILD_DIR)/bitmap.o \
 	$(BUILD_DIR)/memory.o $(BUILD_DIR)/thread.o $(BUILD_DIR)/list.o $(BUILD_DIR)/switch.o \
 	$(BUILD_DIR)/print.o $(BUILD_DIR)/sync.o $(BUILD_DIR)/console.o $(BUILD_DIR)/keyboard.o \
-	$(BUILD_DIR)/ioqueue.o
+	$(BUILD_DIR)/ioqueue.o $(BUILD_DIR)/tss.o $(BUILD_DIR)/process.o
 
 # C代码编译
 $(BUILD_DIR)/entry.o: boot/entry.c
@@ -71,6 +71,12 @@ $(BUILD_DIR)/keyboard.o: device/keyboard.c
 $(BUILD_DIR)/ioqueue.o: device/ioqueue.c
 	$(CC) $(CFLAGS) $< -o $@
 
+$(BUILD_DIR)/tss.o: user/tss.c
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/process.o: user/process.c
+	$(CC) $(CFLAGS) $< -o $@
+
 # 编译loader和mbr
 $(BUILD_DIR)/mbr.bin: mbr/mbr.S
 	$(AS) $(ASIB) $< -o $@
@@ -88,9 +94,6 @@ $(BUILD_DIR)/switch.o: kernel/switch.S
 
 $(BUILD_DIR)/print.o: kernel/print.S
 	$(AS) $(ASFLAGS) $< -o $@
-
-# $(BUILD_DIR)/print.o: lib/kernel/print.asm
-# 	$(AS) $(ASFLAGS) $< -o $@
 
 # 链接
 $(BUILD_DIR)/kernel.bin: $(OBJS)
