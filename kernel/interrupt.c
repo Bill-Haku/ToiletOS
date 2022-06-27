@@ -5,7 +5,7 @@
 # include "../kernel/print.h"
 # include "printk.h"
 
-# define IDT_DESC_CNT 0x21
+# define IDT_DESC_CNT 0x30
 # define PIC_M_CTRL 0x20
 # define PIC_M_DATA 0x21
 # define PIC_S_CTRL 0xa0
@@ -173,20 +173,20 @@ static void idt_desc_init(void) {
 
 static void pic_init(void) {
     // 初始化主片
-    outb(PIC_M_CTRL, 0x11);
-    outb(PIC_M_DATA, 0x20);
+    ioutb(PIC_M_CTRL, 0x11);
+    ioutb(PIC_M_DATA, 0x20);
 
-    outb(PIC_M_DATA, 0x04);
-    outb(PIC_M_DATA, 0x01);
+    ioutb(PIC_M_DATA, 0x04);
+    ioutb(PIC_M_DATA, 0x01);
 
-    outb(PIC_S_CTRL, 0x11);
-    outb(PIC_S_DATA, 0x28);
+    ioutb(PIC_S_CTRL, 0x11);
+    ioutb(PIC_S_DATA, 0x28);
 
-    outb(PIC_S_DATA, 0x02);
-    outb(PIC_S_DATA, 0x01);
+    ioutb(PIC_S_DATA, 0x02);
+    ioutb(PIC_S_DATA, 0x01);
 
-    outb(PIC_M_DATA, 0xfe);
-    outb(PIC_S_DATA, 0xff);
+    ioutb(PIC_M_DATA, 0xfd);
+    ioutb(PIC_S_DATA, 0xff);
 
     put_str("pic_init done.\n");
 }

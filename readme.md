@@ -83,3 +83,7 @@ Test 2 thread exchange.
 ### 0.4.3
 
 Implemet basic console output operations.
+
+### 0.4.4
+
+Implement keyboard input and output based on ioqueue.

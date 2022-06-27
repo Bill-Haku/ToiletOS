@@ -3,7 +3,7 @@
 // 端口写一个字节
 inline void outb(uint16_t port, uint8_t value)
 {
-    asm volatile ("outb %1, %0" : : "dN" (port), "a" (value));
+    asm volatile ("outb %b0, %w1" : : "a" (value), "Nd" (port));
 }
 
 // 端口读一个字节

@@ -3,6 +3,8 @@
 
 # include "stdint.h"
 
+void aput_char(uint8_t char_asci);
+
 void set_cursor(uint32_t pos);
 
 # endif

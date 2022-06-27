@@ -15,14 +15,12 @@ void main(void) {
 	printk_color("Hello!\n",blue, red);
 	printk_color("Welcome to Toilet OS where every App can shits!\n",blue, red);
 
-	thread_start("k_thread_a", 31, k_thread_function_a, "threadA ");
-    thread_start("k_thread_b", 8, k_thread_function_b, "threadB ");
+	// thread_start("k_thread_a", 31, k_thread_function_a, "threadA ");
+    // thread_start("k_thread_b", 8, k_thread_function_b, "threadB ");
 
     intr_enable();
 
-	while(1) {
-		console_put_str("main ");
-	}
+	while (1);
 	return 0;
 }
 

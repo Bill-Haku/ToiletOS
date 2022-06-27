@@ -3,6 +3,7 @@
 #include "vargs.h"
 #include "printk.h"
 #include "version.h"
+#include "../kernel/print.h"
 
 void insert_str(char *inserted_str,char *inserting_str,uint32_t offset)  //插入辅助函数
 {
@@ -32,20 +33,14 @@ void printk(char *input_str,...)
 			if (*(charptr+1)=='s')
 			{
 				char *arg_str_ptr=va_arg(ptr,char*);//此处是否需要复制static数组？
-
 				insert_str(output_str,arg_str_ptr,offset);
-				
 				offset=offset+strlen(arg_str_ptr)-1;
-				
 			}
 			else if(*(charptr+1)=='d')
 			{
 				int arg_int=va_arg(ptr,int);
-
 				char *temp_ptr=uintTostring(arg_int);
-
 				insert_str(output_str,temp_ptr,offset);
-				
 				offset=offset+strlen(temp_ptr)-1;
 			}
 			else if(*(charptr+1)=='c')
@@ -55,21 +50,15 @@ void printk(char *input_str,...)
 			else if(*(charptr+1)=='H')
 			{
 				int arg_int=va_arg(ptr,int);
-
 				char*hexstrptr=num2hexstr(arg_int,1);
-				
 				insert_str(output_str,hexstrptr,offset);
-
 				offset=offset+strlen(hexstrptr)-1;
 			} 
 			else if(*(charptr+1)=='h')
 			{
 				int arg_int=va_arg(ptr,int);
-
 				char*hexstrptr=num2hexstr(arg_int,0);
-				
 				insert_str(output_str,hexstrptr,offset);
-
 				offset=offset+strlen(hexstrptr)-1;
 			}
 		}
@@ -175,7 +164,7 @@ void put_str(char* message) {
 }
 
 void put_char(uint8_t char_ascii) {
-	printk("%c", char_ascii);
+	aput_char(char_ascii);
 }
 
 void put_int(uint32_t num) {

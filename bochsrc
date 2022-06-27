@@ -13,6 +13,7 @@ boot: disk
 
 # 关闭鼠标
 mouse: enabled=0
+# keyboard: keymap=/usr/local/share/bochs/keymaps/x11-pc-us.map
 
 # 硬盘设置
 ata0: enabled=1, ioaddr1=0x1f0, ioaddr2=0x3f0, irq=14

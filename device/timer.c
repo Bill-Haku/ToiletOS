@@ -23,9 +23,9 @@ static void frequency_set(uint8_t counter_port,
                           uint8_t rwl,
                           uint8_t counter_mode,
                           uint16_t counter_value) {
-    outb(PIT_CONTROL_PORT, (uint8_t) (counter_no << 6 | rwl << 4 | counter_mode << 1));
-    outb(counter_port, (uint8_t) counter_value);
-    outb(counter_port, (uint8_t) counter_value >> 8);
+    ioutb(PIT_CONTROL_PORT, (uint8_t) (counter_no << 6 | rwl << 4 | counter_mode << 1));
+    ioutb(counter_port, (uint8_t) counter_value);
+    ioutb(counter_port, (uint8_t) counter_value >> 8);
 }
 
 static void intr_timer_handler(void) {

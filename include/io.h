@@ -6,7 +6,7 @@
 /**
  *  向指定的端口写入一个字节的数据.
  */ 
-static inline void outb(uint16_t port, uint8_t data) {
+static inline void ioutb(uint16_t port, uint8_t data) {
     asm volatile ("outb %b0, %w1" : : "a" (data), "Nd" (port));   
 }
 
@@ -20,7 +20,7 @@ static inline void outsw(uint16_t port, const void* addr, uint32_t word_cnt) {
 /**
  * 将从端口port读入的一个字节返回.
  */ 
-static inline uint8_t inb(uint16_t port) {
+static inline uint8_t iinb(uint16_t port) {
     uint8_t data;
     asm volatile ("inb %w1, %b0" : "=a" (data) : "Nd" (port));
     return data;

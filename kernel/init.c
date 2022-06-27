@@ -4,6 +4,7 @@
 #include "memory.h"
 #include "thread.h"
 #include "../device/console.h"
+#include "../device/keyboard.h"
 
 void init_all() {
     printk("initing_all start...\n");
@@ -17,6 +18,8 @@ void init_all() {
     thread_init();
     // init console
     console_init();
+    // init keyboard
+    keyboard_init();
 
     printk("init_all done.\n");
 }
