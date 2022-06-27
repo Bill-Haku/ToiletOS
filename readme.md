@@ -1,8 +1,8 @@
 # ToiletOS
 
-**This is ToiletOS - an OS where all Apps shits.**
+**This is ToiletOS - an OS where all Apps can shits.**
 
-## New Brach
+## New Branch
 
 - No GRUB Version
 
@@ -87,3 +87,5 @@ Implemet basic console output operations.
 ### 0.4.4
 
 Implement keyboard input and output based on ioqueue.
+
+![image-20220627095606477](/Users/hakubill/Library/Application Support/typora-user-images/image-20220627095606477.png)
