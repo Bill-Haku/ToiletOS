@@ -2,7 +2,7 @@
 #include "printk.h"
 #include "timer.h"
 #include "memory.h"
-#include "thread.h"
+#include "thread/thread.h"
 #include "../device/console.h"
 #include "../device/keyboard.h"
 #include "../user/tss.h"

@@ -1,8 +1,8 @@
 # ifndef SYNC_H
-# define YNC_H
+# define SYNC_H
 
 # include "kernel/list.h"
-# include "thread.h"
+# include "thread/thread.h"
 # include "stdint.h"
 
 /**

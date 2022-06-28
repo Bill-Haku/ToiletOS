@@ -5,6 +5,7 @@
 # include "kernel/list.h"
 # include "memory.h"
 # include "bitmap.h"
+# include "thread/sync.h"
 
 /**
  * 自定义通用函数类型.
