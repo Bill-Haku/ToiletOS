@@ -1,7 +1,7 @@
 #include "printk.h"
 #include "init.h"
 #include "debug.h"
-#include "thread.h"
+#include "thread/thread.h"
 #include "../device/console.h"
 
 void k_thread_function_a(void*);

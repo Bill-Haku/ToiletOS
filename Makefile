@@ -7,7 +7,7 @@ LD = ld
 LIB = -I include
 ASFLAGS = -f elf
 ASIB = -I include/
-CFLAGS = -Wall -m32 -fno-stack-protector $(LIB) -c -fno-builtin -W -Wstrict-prototypes -Wmissing-prototypes
+CFLAGS = -Wall -m32 -fno-stack-protector $(LIB) -c -fno-builtin -W -Wstrict-prototypes -Wmissing-prototypes -w
 LDFLAGS = -m elf_i386 -Ttext $(ENTRY_POINT) -e main -Map $(BUILD_DIR)/kernel.map
 OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/entry.o $(BUILD_DIR)/printk.o $(BUILD_DIR)/string.o \
 	$(BUILD_DIR)/vga_basic.o $(BUILD_DIR)/port.o $(BUILD_DIR)/timer.o $(BUILD_DIR)/debug.o \

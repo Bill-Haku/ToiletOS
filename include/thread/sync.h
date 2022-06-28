@@ -2,7 +2,7 @@
 # define YNC_H
 
 # include "kernel/list.h"
-# include "thread.h"
+# include "thread/thread.h"
 # include "stdint.h"
 
 /**
