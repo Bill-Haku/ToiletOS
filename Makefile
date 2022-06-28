@@ -44,7 +44,7 @@ $(BUILD_DIR)/timer.o: device/timer.c
 $(BUILD_DIR)/debug.o: kernel/debug.c 
 	$(CC) $(CFLAGS) $< -o $@
 
-$(BUILD_DIR)/bitmap.o: kernel/bitmap.c 
+$(BUILD_DIR)/bitmap.o: libs/kernel/bitmap.c 
 	$(CC) $(CFLAGS) $< -o $@
 
 $(BUILD_DIR)/memory.o: kernel/memory.c 
@@ -53,7 +53,7 @@ $(BUILD_DIR)/memory.o: kernel/memory.c
 $(BUILD_DIR)/thread.o: kernel/thread/thread.c
 	$(CC) $(CFLAGS) $< -o $@
 
-$(BUILD_DIR)/list.o: include/kernel/list.c
+$(BUILD_DIR)/list.o: libs/kernel/list.c
 	$(CC) $(CFLAGS) $< -o $@
 
 $(BUILD_DIR)/sync.o: kernel/thread/sync.c

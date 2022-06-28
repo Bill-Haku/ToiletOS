@@ -1,9 +1,19 @@
-*.img
+# IDE
 /.idea
-.DS_Store
+/.vscode
+
+# Compile Outputs
+/build
 *.bin
 *.elf
-/.vscode
+*.o
+
+# OS
+.DS_Store
+
+# Bochs files
 *.lock
 copy.txt
 
+# Disk Image
+*.img
