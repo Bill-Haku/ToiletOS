@@ -17,3 +17,9 @@ copy.txt
 
 # Disk Image
 *.img
+
+# Dev
+update-mirror.sh
+upbuild.sh
+downdisk.sh
+kill.sh

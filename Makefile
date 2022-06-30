@@ -14,7 +14,8 @@ OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/printk.o $(BUILD_DIR)/string.o \
 	$(BUILD_DIR)/init.o $(BUILD_DIR)/interrupt.o $(BUILD_DIR)/kernel.o $(BUILD_DIR)/bitmap.o \
 	$(BUILD_DIR)/memory.o $(BUILD_DIR)/thread.o $(BUILD_DIR)/list.o $(BUILD_DIR)/switch.o \
 	$(BUILD_DIR)/print.o $(BUILD_DIR)/sync.o $(BUILD_DIR)/console.o $(BUILD_DIR)/keyboard.o \
-	$(BUILD_DIR)/ioqueue.o
+	$(BUILD_DIR)/ioqueue.o $(BUILD_DIR)/syscall.o $(BUILD_DIR)/process.o $(BUILD_DIR)/syscall-init.o \
+	$(BUILD_DIR)/tss.o
 
 # C代码编译
 $(BUILD_DIR)/port.o: libs/port.c
@@ -68,6 +69,18 @@ $(BUILD_DIR)/keyboard.o: device/keyboard.c
 $(BUILD_DIR)/ioqueue.o: device/ioqueue.c
 	$(CC) $(CFLAGS) $< -o $@
 
+$(BUILD_DIR)/syscall.o: libs/user/syscall.c
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/process.o: user/process.c
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/syscall-init.o: user/syscall-init.c
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/tss.o: user/tss.c
+	$(CC) $(CFLAGS) $< -o $@
+
 # 编译loader和mbr
 $(BUILD_DIR)/mbr.bin: boot/mbr.S
 	$(AS) $(ASIB) $< -o $@
@@ -102,7 +115,7 @@ mk_dir:
 
 mkbochs:
 	if [ ! -d $(BUILD_DIR) ]; then mkdir $(BUILD_DIR); fi
-	rm disk.img
+	if [ -f disk.img ]; then rm disk.img; fi
 	bximage -hd=10M -mode="create" -q disk.img
 
 hd:

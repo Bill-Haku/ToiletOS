@@ -3,11 +3,14 @@
 
 # include "stdint.h"
 # include "kernel/list.h"
+# include "memory.h"
+# include "bitmap.h"
 
 /**
  * 自定义通用函数类型.
  */ 
 typedef void thread_func(void*);
+typedef int16_t pid_t;
 
 /**
  * 线程状态.
@@ -68,6 +71,7 @@ struct thread_stack {
 struct task_struct {
     // 内核栈
     uint32_t* self_kstack;
+    pid_t pid;
     enum task_status status;
     char name[16];
     uint8_t priority;
@@ -80,8 +84,12 @@ struct task_struct {
     // 所有不可运行线程队列节点
     struct list_elem all_list_tag;
     uint32_t* pgdir;
+    struct virtual_addr userprog_addr;
     uint32_t stack_magic;
 };
+
+extern struct list thread_ready_list;
+extern struct list thread_all_list;
 
 struct task_struct* running_thread();
 void thread_create(struct task_struct* pthread, thread_func function, void* func_args);
@@ -89,5 +97,7 @@ void init_thread(struct task_struct* pthread, char* name, int prio);
 struct task_struct* thread_start(char* name, int prio, thread_func function, void* func_args);
 void schedule();
 void thread_init();
+void thread_block(enum task_status status);
+void thread_unblock(struct task_struct* pthread);
 
 # endif

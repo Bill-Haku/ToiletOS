@@ -5,13 +5,15 @@
 # include "../kernel/print.h"
 # include "printk.h"
 
-# define IDT_DESC_CNT 0x30
+# define IDT_DESC_CNT 0x81
 # define PIC_M_CTRL 0x20
 # define PIC_M_DATA 0x21
 # define PIC_S_CTRL 0xa0
 # define PIC_S_DATA 0xa1
 # define EFLAGS_IF 0x00000200
 # define GET_EFLAGS(EFLAG_VAR) asm volatile ("pushfl; popl %0" : "=g" (EFLAG_VAR))
+
+extern uint32_t syscall_handler(void);
 
 struct gate_desc {
     uint16_t func_offset_low_word;
@@ -164,10 +166,11 @@ static void make_idt_desc(struct gate_desc* p_gdesc, uint8_t attr, intr_handler 
  * 初始化中断描述符表.
  */ 
 static void idt_desc_init(void) {
-    int i;
+    int i, lastindex = IDT_DESC_CNT - 1;
     for (i = 0; i < IDT_DESC_CNT; i++) {
-        make_idt_desc(&idt[i], IDT_DESC_ATTR_DPL0, intr_entry_table[i]);
+        make_idt_desc(&idt[i], IDT_DESC_ATTR_DPL0, intr_entry_table[i]); 
     }
+    make_idt_desc(&idt[lastindex], IDT_DESC_ATTR_DPL3, syscall_handler);
     put_str("idt_desc_init done.\n");
 }
 

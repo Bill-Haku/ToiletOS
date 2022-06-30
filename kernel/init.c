@@ -5,6 +5,8 @@
 #include "thread/thread.h"
 #include "../device/console.h"
 #include "../device/keyboard.h"
+#include "tss.h"
+#include "syscall-init.h"
 
 void init_all() {
     printk("initing_all start...\n");
@@ -20,6 +22,10 @@ void init_all() {
     console_init();
     // init keyboard
     keyboard_init();
+    // init tss
+    tss_init();
+    // init syscall
+    // syscall_init();
 
     printk("init_all done.\n");
 }

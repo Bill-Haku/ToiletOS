@@ -51,7 +51,7 @@ inline char *num2hexstr(int number,int need0x)
 }
 
 
-inline void memcpy(uint8_t *dest ,const uint8_t *src,uint32_t len)
+void memcpy(uint8_t *dest ,const uint8_t *src,uint32_t len)
 {
 	ASSERT(dest != NULL && src != NULL);
 	for(;len!=0;len--)
@@ -62,7 +62,7 @@ inline void memcpy(uint8_t *dest ,const uint8_t *src,uint32_t len)
 	}
 }
 
-inline void memset(void *dest,uint8_t val ,uint32_t len)
+void memset(void *dest,uint8_t val ,uint32_t len)
 {
 	ASSERT(dest != NULL);
 	uint8_t *dst = (uint8_t *)dest;

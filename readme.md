@@ -6,7 +6,7 @@
 
 - No GRUB Version
 
-## Devlop log
+## Develop log
 
 ### 0.0.1
 

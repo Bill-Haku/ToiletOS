@@ -3,38 +3,72 @@
 #include "debug.h"
 #include "thread/thread.h"
 #include "../device/console.h"
+#include "process.h"
+#include "syscall-init.h"
+#include "syscall.h"
 
-void k_thread_function_a(void*);
-void k_thread_function_b(void*);
+void k_thread_a(void*);
+void k_thread_b(void*);
+void u_prog_a(void);
+void u_prog_b(void);
+int prog_a_pid = 0, prog_b_pid = 0;
 
 void main(void) {
 	printkDebug();
 	init_all();
-	// asm volatile("sti");
 	printk("Toilet OS Start Complete!\n");
 	printk_color("Hello!\n",blue, red);
 	printk_color("Welcome to Toilet OS where every App can shits!\n",blue, red);
 
-	// thread_start("k_thread_a", 31, k_thread_function_a, "threadA ");
-    // thread_start("k_thread_b", 8, k_thread_function_b, "threadB ");
+	process_execute(u_prog_a, "user_prog_a");
+	process_execute(u_prog_b, "user_prog_b");
+
+	thread_start("k_thread_a", 31, k_thread_a, "argA ");
+   	thread_start("k_thread_b", 31, k_thread_b, "argB ");
 
     intr_enable();
+
+	console_put_str(" main_pid:0x");
+   	console_put_int(sys_getpid());
+   	console_put_char('\n');
 
 	while (1);
 	return 0;
 }
 
-void k_thread_function_a(void* args) {
-	char* para = args;
-    // 这里必须是死循环，否则执行流并不会返回到main函数，所以CPU将会放飞自我，出发6号未知操作码异常
-    while (1) {
-        console_put_str(para);
-    }
+
+/* 在线程中运行的函数 */
+void k_thread_a(void* arg) {     
+   char* para = arg;
+   console_put_str(" thread_a_pid:0x");
+   console_put_int(sys_getpid());
+   console_put_char('\n');
+   console_put_str(" prog_a_pid:0x");
+   console_put_int(prog_a_pid);
+   console_put_char('\n');
+   while(1);
 }
 
-void k_thread_function_b(void* args) {
-	char* para = args;
-    while (1) {
-        console_put_str(para);
-    }
+/* 在线程中运行的函数 */
+void k_thread_b(void* arg) {     
+   char* para = arg;
+   console_put_str(" thread_b_pid:0x");
+   console_put_int(sys_getpid());
+   console_put_char('\n');
+   console_put_str(" prog_b_pid:0x");
+   console_put_int(prog_b_pid);
+   console_put_char('\n');
+   while(1);
+}
+
+/* 测试用户进程 */
+void u_prog_a(void) {
+   prog_a_pid = getpid();
+   while(1);
+}
+
+/* 测试用户进程 */
+void u_prog_b(void) {
+   prog_b_pid = getpid();
+   while(1);
 }

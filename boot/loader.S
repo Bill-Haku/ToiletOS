@@ -1,8 +1,5 @@
 %include "boot.inc"
-
 section loader vstart=LOADER_BASE_ADDR
-LOADER_STACK_TOP equ LOADER_BASE_ADDR
-jmp loader_start
 
 ; 这里其实就是GDT的起始地址，第一个描述符为空
 GDT_BASE: dd 0x00000000
@@ -41,7 +38,6 @@ loader_start:
     xor ebx, ebx
     mov edx, 0x534d4150
     mov di, ards_buf
-    mov byte [gs:164], 'X'
 
 .e820_mem_get_loop:
     mov eax, 0x0000e820

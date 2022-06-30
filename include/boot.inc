@@ -8,6 +8,7 @@
 
 ;---------------------------loader和kernel-------------
 LOADER_BASE_ADDR equ 0x900
+LOADER_STACK_TOP equ LOADER_BASE_ADDR
 LOADER_START_SECTOR equ 0x2
 PAGE_DIR_TABLE_POS equ 0x100000
 KERNEL_START_SECTOR equ 0x9
